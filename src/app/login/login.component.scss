@@ -1,0 +1,191 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+::-ms-reveal {
+    display: none;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+form {
+    padding: 15% 14% 0;
+}
+
+.global-container {
+    height: 100vh;
+    width: 100%;
+    background-image: url("./../../assets/images/MicrosoftTeams-image.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    padding-top: 6%;
+}
+
+.login-form,
+.forgot-form {
+    color: #343434;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 13px 30px rgb(0 0 0 / 7%);
+    background-color: whitesmoke;
+    opacity: 0.9;
+    width: 56%;
+}
+
+.forgot-bg {
+    position: fixed;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    background-size: 59%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+}
+
+.login-logo {
+    width: 45%;
+    padding: 14% 0 0
+}
+
+.cloud-image {
+    padding-left: 5%;
+}
+
+.login-form .label {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.form-input {
+    font-size: 14px;
+    height: 40px;
+    padding: 0px 7px;
+    border: 1px solid #ddd;
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    height: 40px;
+    margin-bottom: 15%;
+}
+
+
+.login-footer {
+    border-radius: 0 0 4px 4px;
+    color: #707070;
+    text-align: center;
+    font-weight: 400;
+}
+
+.powered-logo {
+    width: 24%;
+    vertical-align: baseline;
+}
+
+.forgot-password {
+    margin-bottom: 10px;
+}
+
+
+* {
+    margin: 1px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .global-container {
+//     height: 100vh;
+//     width: 100%;
+//     // background-color: #fff;  
+//     background-image: url("./../../assets/images/MicrosoftTeams-image.png");
+//     background-repeat: no-repeat;
+//     background-attachment: fixed;
+//     background-size: cover;
+//     background-position: center;
+//     overflow: hidden;
+//     padding-top: 6%;
+// }
+// .cloud-image{
+//     padding-left: 5%;
+//   }
+
+// .login-form {
+//     color: #343434;
+//     font-size: 14px;
+//     box-sizing: border-box;
+//     margin: auto;
+//     border-radius: 10px;
+//     box-shadow: 0 13px 30px rgb(0 0 0 / 7%);
+//     background-color: whitesmoke;
+//     opacity: 0.8;
+//     width: 56%;
+// }
+
+// * {
+//     margin: 1px;
+//     padding: 0;
+//     box-sizing: border-box;
+// }
+
+// .login-logo {
+//     // padding: 70px 0 0;
+//     width: 45%;
+//     padding: 14% 0 0
+// }
+
+// .login-form .label {
+//     font-size: 15px;
+//     font-weight: 400;
+//     // color: #343434;
+// }
+
+// .form-input{
+//     font-size: 14px;
+//     height: 40px;
+//     // margin: 0px;
+//     padding: 0px 7px;
+//     border: 1px solid #ddd;
+//     background-color: #FFFFFF;
+//     border-radius: 3px;
+//     width: 100%;
+//     margin-bottom: 20px;
+//   }

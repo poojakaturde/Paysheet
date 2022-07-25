@@ -1,0 +1,35 @@
+mat-sidenav-container {
+  height: 100%;
+
+  mat-sidenav {
+    background-color: rgb(165, 155, 155);
+
+    mat-nav-list {
+      .menu-item {
+        margin-left: 8px;
+      }
+
+      // .chevron-button {
+      //   transition: 300ms ease-in-out;
+      //   transform: rotate(0deg);
+      // }
+
+      .chevron-button.rotated {
+        transform: rotate(180deg);
+      }
+
+      img.img-fluid {
+        height: 24px;
+        width: 24px;
+        margin-left: 3px;
+      }
+      .row-color{
+        background: orangered;
+      }
+    }
+  }
+}
+
+.mat-toolbar{
+  height: 58px;
+}

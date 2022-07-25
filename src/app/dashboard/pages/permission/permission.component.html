@@ -1,0 +1,190 @@
+<div class="container-fluid pb-4">
+  <button
+    (click)="clickAddData(content)"
+    type="button"
+    class="btn btn-info btn-lg data-font wh-text"
+    style="float: right"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Create Permission
+  </button>
+</div>
+<div class="container  py-5">
+<div class=" mat-elevation-z0 px-3">
+  <table mat-table [dataSource]="dataSource" matSort class="table table-hover">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="heading-style">Name</th>
+      <td mat-cell *matCellDef="let element" class="data-font">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef class="heading-style">Type</th>
+      <td mat-cell *matCellDef="let element" class="data-font">{{ element.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="heading-style">Status</th>
+      <td mat-cell *matCellDef="let element" class="data-font">
+        {{ element.status == true ? "Active" : "Inactive" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="heading-style"
+      >
+        Action
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <i
+          class="material-icons"
+          style="cursor: pointer"
+          (click)="onEditData(content, element)"
+          >edit</i
+        >&nbsp;
+
+        <i
+          class="material-symbols-outlined"
+          style="cursor: pointer"
+          (click)="deleteData(element)"
+          >delete</i
+        >&nbsp;
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[3, 5, 10]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
+</div>
+<!-- </mat-card> -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title heading-text" id="modal-basic-title">Permission</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formValue">
+      <div class="form-group">
+        <label class="heading-text">Name</label>
+
+        <input
+          type="email"
+          formControlName="name"
+          class="form-control"
+          placeholder="Permission Name Here"
+        />
+
+        <br />
+
+        <label class="heading-text">Type</label>
+
+        <input
+          type="email"
+          formControlName="type"
+          class="form-control"
+          placeholder="Type"
+        />
+
+        <br />
+
+        <label class="heading-text">Status</label>&nbsp;
+        <mat-slide-toggle
+          formControlName="status"
+          #myToggle
+          class="heading-text"
+          >{{ myToggle.checked ? "Active" : "Inactive" }}</mat-slide-toggle
+        >
+
+        <br />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      *ngIf="showAdd"
+      type="button"
+      class="btn btn-color heading-text"
+      (click)="addPermission()"
+    >
+      Add Detail
+    </button>
+    <button
+      *ngIf="showbtn"
+      type="button"
+      (click)="updateData()"
+      class="btn btn-color heading-text"
+    >
+      Update Details
+    </button>
+  </div>
+</ng-template>
+
+<!------------------------------------------------Show Data------------------------------------->
+
+<ng-template #contentView let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title heading-text" id="modal-basic-title">Permission</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formValue">
+      <div class="form-group">
+        <br />
+
+        <label class="heading-text">Name</label>
+
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Role Name Here"
+          [readonly]="true"
+        />
+
+        <label class="heading-text">Type</label>
+
+        <input
+          type="text"
+          formControlName="type"
+          class="form-control"
+          placeholder="Status"
+          [readonly]="true"
+        />
+
+        <br />
+
+        <label class="heading-text">Status</label>&nbsp;
+        <mat-slide-toggle
+          formControlName="status"
+          #myToggle1
+          class="heading-text"
+          >{{ myToggle1.checked ? "Active" : "Inactive" }}</mat-slide-toggle
+        >
+
+        <br />
+      </div>
+    </form>
+  </div>
+</ng-template>
