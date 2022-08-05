@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { PermissionComponent } from './pages/permission/permission.component';
-import { EmployeeComponent } from './pages/employee/employee.component';
-import { WrapperComponent } from './pages/wrapper/wrapper.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { TasksComponent } from './pages/tasks/tasks.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProjectsRoutingModule } from './projects-routing.module';
+import { ProjectsComponent } from './projects/projects.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
@@ -27,22 +21,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from
   '@angular/material/core';
 
+
+
 @NgModule({
   declarations: [
-    PermissionComponent,
-    EmployeeComponent,
-    WrapperComponent,
-    TasksComponent,
+    ProjectsComponent,
+    CreateProjectComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
-    MatDatepickerModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatTooltipModule,
+    ProjectsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -56,7 +44,8 @@ import { MatNativeDateModule } from
     MatAutocompleteModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDatepickerModule
   ]
 })
-export class DashboardModule { }
+export class ProjectsModule { }

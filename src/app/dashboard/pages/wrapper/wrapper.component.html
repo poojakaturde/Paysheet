@@ -3,82 +3,43 @@
     <mat-nav-list>
       <mat-list-item class="row-color">
         <div class="logo-image">
-          <img
-            *ngIf="!isExpanded"
-            src="./../../../../assets/images/projectLogoN.png"
-            class="img-fluid"
-          />
+          <img *ngIf="!isExpanded" src="./../../../../assets/images/projectLogoN.png" class="img-fluid" />
           <span *ngIf="isExpanded" class="menu-item">
-            <img
-              src="./../../../../assets/images/nts.png"
-              class="img-fluid"
-              style="height: 24px; width: 107px"
-            />
+            <img src="./../../../../assets/images/nts.png" class="img-fluid" style="height: 24px; width: 107px" />
           </span>
         </div>
       </mat-list-item>
 
       <mat-list-item [routerLinkActive]="['active']" [routerLink]="'employee'">
-        <mat-icon
-          mat-list-icon
-          matTooltip="Employee"
-          matTooltipPosition="right"
-          class="wh-text"
-          >people</mat-icon
-        >
+        <mat-icon mat-list-icon matTooltip="Employee" matTooltipPosition="right" class="wh-text">people</mat-icon>
         <span *ngIf="isExpanded" class="menu-item wh-text text-font">Employee</span>
       </mat-list-item>
 
       <mat-list-item [routerLinkActive]="['active']" [routerLink]="'permission'">
-        <mat-icon
-          mat-list-icon
-          matTooltip="Permission"
-          matTooltipPosition="right"
-          class="wh-text"
-          >vpn_key</mat-icon
-        >
+        <mat-icon mat-list-icon matTooltip="Permission" matTooltipPosition="right" class="wh-text">vpn_key</mat-icon>
         <span *ngIf="isExpanded" class="menu-item wh-text text-font">Permission</span>
       </mat-list-item>
 
       <mat-list-item [routerLinkActive]="['active']" [routerLink]="'role'">
-        <mat-icon
-          mat-list-icon
-          matTooltip="Role"
-          matTooltipPosition="right"
-          class="wh-text"
-          >home</mat-icon
-        >
+        <mat-icon mat-list-icon matTooltip="Role" matTooltipPosition="right" class="wh-text">assignment_ind</mat-icon>
         <span *ngIf="isExpanded" class="menu-item wh-text text-font">Role</span>
       </mat-list-item>
 
       <mat-list-item [routerLinkActive]="['active']" [routerLink]="'projects'">
-        <mat-icon
-          mat-list-icon
-          matTooltip="Projects"
-          matTooltipPosition="right"
-          class="wh-text"
-          >important_devices</mat-icon
-        >
+        <mat-icon mat-list-icon matTooltip="Project" matTooltipPosition="right" class="wh-text">dvr
+        </mat-icon>
         <span *ngIf="isExpanded" class="menu-item wh-text text-font">Projects</span>
       </mat-list-item>
 
       <mat-list-item [routerLinkActive]="['active']" [routerLink]="'tasks'">
-        <mat-icon
-          mat-list-icon
-          matTooltip="Task"
-          matTooltipPosition="right"
-          class="wh-text"
-          >supervisor_account</mat-icon
-        >
+        <mat-icon mat-list-icon matTooltip="Task" matTooltipPosition="right" class="wh-text">supervisor_account
+        </mat-icon>
         <span *ngIf="isExpanded" class="menu-item wh-text text-font">Tasks</span>
       </mat-list-item>
 
       <mat-list-item (click)="isExpanded = !isExpanded">
-        <mat-icon
-          mat-list-icon
-          class="chevron-button chevron-button.rotated wh-text "
-          [ngClass]="{ rotated: isExpanded }"
-          >chevron_right
+        <mat-icon mat-list-icon class="chevron-button chevron-button.rotated wh-text "
+          [ngClass]="{ rotated: isExpanded }">chevron_right
         </mat-icon>
       </mat-list-item>
     </mat-nav-list>
@@ -87,11 +48,8 @@
   <mat-sidenav-content>
     <mat-toolbar class="navigation-bar px-4">
       <span class="example-spacer "></span>
-      <span
-        (click)="logout()"
-        matTooltip="Logout"
-        class="text-center ml-3 link primary-font-color d-flex justify-content-center align-items-center logout-color"
-      >
+      <span (click)="logout()" matTooltip="Logout"
+        class="text-center ml-3 link primary-font-color d-flex justify-content-center align-items-center logout-color">
         <i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;
       </span>
     </mat-toolbar>

@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -41,7 +42,7 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private http: HttpClient, private cd: ChangeDetectorRef,) { }
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private http: HttpClient,private router: Router) { }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -68,15 +69,16 @@ export class ProjectsComponent implements OnInit {
   }
 
   clickAddData(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    this.formValue.reset();
-    this.showAdd = true;
-    this.showbtn = false;
-    if(this.showAdd){
-      this.getTaskData();
-      this.tasksSelected=[];
-    }
-  
+    
+    // this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    // this.formValue.reset();
+    // this.showAdd = true;
+    // this.showbtn = false;
+    // if (this.showAdd) {
+    //   this.getTaskData();
+    //   this.tasksSelected = [];
+    // }
+
   }
 
   ngOnInit(): void {
@@ -105,7 +107,7 @@ export class ProjectsComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
-  
+
   }
 
   getTaskData() {
@@ -195,7 +197,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateData() {
-    
+
     this.projectObject.id = this.projectObject.id;
     this.projectObject.name = this.formValue.value.name;
     this.projectObject.status = this.formValue.value.status;
@@ -206,30 +208,31 @@ export class ProjectsComponent implements OnInit {
     this.projectObject.sdate = this.formValue.value.sdate;
     this.projectObject.edate = this.formValue.value.edate;
     console.log(this.projectObject.id);
-    this.http.put("http://localhost:3000/posts/"+this.projectObject.id, this.projectObject).subscribe((res) => {
+    this.http.put("http://localhost:3000/posts/" + this.projectObject.id, this.projectObject).subscribe((res) => {
       console.log(res);
       this.getProjectData();
     })
     this.formValue.reset();
-    this.tasksSelected=[];
+    this.tasksSelected = [];
     this.modalService.dismissAll();
   }
 
-  optionClicked(event: Event, item:any) {
+  optionClicked(event: Event, item: any) {
     event.stopPropagation();
     this.toggleSelection(item);
   }
 
-  toggleSelection(task:any) {
+  toggleSelection(task: any) {
     task.selected = !task.selected;
     if (task.selected) {
       this.tasksSelected.push(task);
       this.changeCallback(this.tasksSelected);
     } else {
-      const i = this.tasksSelected.findIndex((value:any) => value === task);
+      const i = this.tasksSelected.findIndex((value: any) => value === task);
       this.tasksSelected.splice(i, 1);
       this.changeCallback(this.tasksSelected);
     }
 
   }
+
 }

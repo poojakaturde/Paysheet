@@ -1,0 +1,212 @@
+<form [formGroup]="formValue">
+    <div class="form-group">
+        <div style="display:inline-block;width:47%">
+            <mat-form-field appearance="outline">
+                <mat-label>Project Name</mat-label>
+                <input matInput type="text" formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div style="display: inline-block; padding-left: 20px; width:47%">
+            <label class="heading-text">Status</label>
+            <br /><br />
+            <mat-slide-toggle formControlName="status" #myToggle class="heading-text">{{ myToggle.checked ?
+                "Active"
+                :
+                "Inactive" }}</mat-slide-toggle>
+        </div>
+
+        <div class="mb-3" style="display:inline-block;width:47%">
+            <mat-form-field appearance="outline">
+                <mat-label>Admin</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Admin" matInput formControlName="admin"
+                    [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let admin of admins" [value]="admin">
+                        {{admin}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="mb-3" style="display:inline-block; padding-left: 10px;">
+            <mat-form-field appearance="outline">
+                <mat-label>Manager</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Manager" matInput
+                    formControlName="manager" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let manager of managers" [value]="manager">
+                        {{manager}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" style="width: 95%;">
+            <mat-label>Roles</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Roles" matInput formControlName="role"
+                [matAutocomplete]="auto3">
+            <mat-autocomplete #auto3="matAutocomplete">
+                <mat-option *ngFor="let role of roles" [value]="role">
+                    {{role}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field style="width: 95%;" appearance="outline">
+            <mat-label>Tasks</mat-label>
+            <mat-chip-list #chipList aria-label="Task selection">
+                <mat-chip *ngFor="let task of tasksSelected" (removed)="remove(task)">
+                    <div *ngIf="task.selected">{{task.task}}</div>
+                    <i class="material-icons" matChipRemove>cancel</i>
+                </mat-chip>
+                <input placeholder="" #taskInput formControlName="tasks" [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let task of allTasks" [value]="allTasks.task">
+                    <div (click)="optionClicked($event, task);">
+                        <mat-checkbox [checked]="task.selected" (change)="toggleSelection(task)"
+                            (click)="$event.stopPropagation()">
+                            {{ task.task }}
+                        </mat-checkbox>
+                    </div>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="mb-3">
+            <mat-form-field appearance="outline" style="width: 95%;">
+                <mat-label>Choose Start date</mat-label>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <input matInput [matDatepicker]="picker" formControlName="sdate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-form-field appearance="outline" style="width: 95%;">
+                <mat-label>Choose End date</mat-label>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <input matInput [matDatepicker]="picker1" formControlName="edate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+</div>
+<div class="modal-footer">
+<button *ngIf="showAdd" type="button" class="btn btn-color heading-text" (click)="addProject()">
+    Add Detail
+</button>
+<button *ngIf="showbtn" type="button" (click)="updateData()" class="btn btn-color heading-text">
+    Update Details
+</button>
+</div>
+</ng-template>
+
+<!------------------------------------------------Show Data------------------------------------->
+
+<ng-template #contentView let-modal>
+<div class="modal-header">
+<h4 class="modal-title heading-text" id="modal-basic-title">Project</h4>
+<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+<form style="overflow: scroll; height: 450px; overflow-x: hidden;" [formGroup]="formValue">
+    <div class="form-group">
+        <div style="display:inline-block;width:47%">
+            <mat-form-field appearance="outline">
+                <mat-label>Project Name</mat-label>
+                <input matInput type="text" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div style="display: inline-block; padding-left: 20px; width:47%">
+            <label class="heading-text">Status</label>
+            <br /><br />
+            <mat-slide-toggle formControlName="status" #myToggle class="heading-text">{{ myToggle.checked ?
+                "Active"
+                :
+                "Inactive" }}</mat-slide-toggle>
+        </div>
+        <div class="mb-3" style="display:inline-block;width:47%">
+            <mat-form-field appearance="fill">
+                <mat-label>Admin</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Admin" matInput formControlName="admin"
+                    [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let admin of admins" [value]="admin">
+                        {{admin}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="mb-3" style="display:inline-block; padding-left: 10px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Manager</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Manager" matInput
+                    formControlName="manager" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let manager of managers" [value]="manager">
+                        {{manager}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-form-field appearance="fill" style="width: 95%;">
+                <mat-label>Roles</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Roles" matInput formControlName="role"
+                    [matAutocomplete]="auto3">
+                <mat-autocomplete #auto3="matAutocomplete">
+                    <mat-option *ngFor="let role of roles" [value]="role">
+                        {{role}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <mat-form-field style="width: 95%;" appearance="fill">
+            <mat-label>Tasks</mat-label>
+            <mat-chip-list #chipList aria-label="Task selection">
+                <mat-chip *ngFor="let task of tasksSelected" (removed)="remove(task)">
+                    <div *ngIf="task.selected">{{task.task}}</div>
+
+                    <i class="material-icons" matChipRemove>cancel</i>
+                </mat-chip>
+                <input placeholder="" #taskInput formControlName="tasks" [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let task of allTasks" [value]="tasksSelected.task">
+                    <div (click)="optionClicked($event, task);">
+                        <mat-checkbox [checked]="task.selected" (change)="toggleSelection(task)"
+                            (click)="$event.stopPropagation()">
+                            {{ task.task }}
+                        </mat-checkbox>
+                    </div>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="mb-3">
+            <mat-form-field appearance="fill" style="width: 95%;">
+                <mat-label>Choose Start date</mat-label>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <input matInput [matDatepicker]="picker" formControlName="sdate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-form-field appearance="fill" style="width: 95%;">
+                <mat-label>Choose End date</mat-label>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <input matInput [matDatepicker]="picker1" formControlName="edate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
