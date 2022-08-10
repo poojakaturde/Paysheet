@@ -5,7 +5,11 @@
     /* border-color: #0dcaf0; */
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
     margin: 15px;
     font-family: inherit;
     font-size: inherit;
@@ -27,39 +31,48 @@ button, input, optgroup, select, textarea {
     -moz-appearance: none;
     appearance: none;
     border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
     padding: 12px;
     border-bottom-width: 1px;
     border-bottom-style: solid;
+
 }
-.heading-style{
+
+th.mat-header-cell {
+    text-align: center;
+}
+
+.heading-style {
     font-size: large;
     font-family: 'Montserrat', sans-serif;
     color: #000;
 }
-.data-font{
+
+.data-font {
     font-family: 'Montserrat', sans-serif;
 }
- .container-fluid{
+
+.container-fluid {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+
 }
 
 
 
-.heading-text{
+.heading-text {
     font-size: 1rem;
     text-align: center;
     color: #000;
 }
 
-.btn-color{
+.btn-color {
     background-color: #667dff;
     color: white;
     font-size: 1rem;
@@ -68,13 +81,15 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 table {
     width: 100%;
 }
+
 .row-color {
     border-bottom: 2px solid #e87033;
-  }
-
-.table-css{
- color: red;
 }
-.wh-text{
+
+.table-css {
+    color: red;
+}
+
+.wh-text {
     color: white;
 }

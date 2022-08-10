@@ -1,38 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ApiService } from 'src/app/shared/api.service';
 import { projectData } from '../projects/projects.modal';
-import { Router } from '@angular/router';
-@Component({
-  selector: 'app-create-project',
-  templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.scss']
-})
-export class CreateProjectComponent implements OnInit {
 
-  formValue!: FormGroup
+@Component({
+  selector: 'app-edit-project',
+  templateUrl: './edit-project.component.html',
+  styleUrls: ['./edit-project.component.scss']
+})
+export class EditProjectComponent implements OnInit {
+
+  updateDataObject: any;
+  formValue!: FormGroup;
+  tasksSelected: any = [];
   projectObject: projectData = new projectData;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  projectData: any;
-  tasksSelected: any = [];
   selectedRoles: any = [];
   selectedProjectInfo: any = [];
   allTasks: any;
   admins: any;
   managers: any;
+  roles: any;
   role: String[] = ['Manager', 'Developer', 'Tester', 'Admin'];
   userList: string[] = ['pooja.katurde@neutrinotechlabs.com', 'shrinivas.chidrawar@@neutrinotechlabs.com', 'akshay.kumar@neutrinotechlabs.com']
-  createBtn = true;
-  updateBtn = false;
-  updateDataObject: any;
-  result:any;
   private changeCallback!: Function;
 
   @ViewChild('taskInput') taskInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private shared: ApiService, private formBuilder: FormBuilder, private http: HttpClient) { }
+
+  ngOnInit(): void {
+
+    this.formValue = this.formBuilder.group({
+      name: [''],
+      status: false,
+      admin: [''],
+      manager: [''],
+      role: [''],
+      tasks: [''],
+      sdate: [''],
+      edate: ['']
+    })
+
+    this.updateDataObject = this.shared.getUpdateData();
+    console.log(this.updateDataObject)
+    this.showData();
+    this.getTaskData();
+    this.getAdminData();
+    this.getManagersData();
+
+  }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -49,23 +69,6 @@ export class CreateProjectComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.formValue = this.formBuilder.group({
-      name: ['', Validators.required],
-      status: [false, Validators.required],
-      admin: ['', Validators.required],
-      manager: ['', Validators.required],
-      role: [''],
-      tasks: ['', Validators.required],
-      sdate: ['', Validators.required],
-      edate: ['', Validators.required]
-    })
-    this.getTaskData();
-    this.getAdminData();
-    this.getManagersData();
-
-  }
-
   getTaskData() {
     this.http.get("http://localhost:3000/profile").subscribe((res) => {
       this.allTasks = res;
@@ -78,44 +81,10 @@ export class CreateProjectComponent implements OnInit {
     })
   }
 
-  // getRoleData() {
-  //   this.http.get("http://localhost:3000/roles").subscribe((res) => {
-  //     let roles =Object.keys(res).map(([type, value]) => ({type, value}))
-  //     console.log(roles)
-  //   })
-  // }
-
   getManagersData() {
     this.http.get("http://localhost:3000/manager").subscribe((res) => {
       this.managers = res;
     })
-  }
-
-  createProject() {
-    console.log(this.formValue)
-    this.projectObject.name = this.formValue.value.name;
-    this.projectObject.status = this.formValue.value.status;
-    this.projectObject.admin = this.formValue.value.admin;
-    this.projectObject.manager = this.formValue.value.manager;
-    this.projectObject.role = this.selectedProjectInfo;
-    this.formValue.controls['tasks'].setValue(this.tasksSelected);
-    this.projectObject.tasks = this.formValue.value.tasks;
-    this.projectObject.sdate = this.formValue.value.sdate;
-    this.projectObject.edate = this.formValue.value.edate;
-
-    if (this.formValue.valid) {
-      this.http.post<any>("http://localhost:3000/posts", this.projectObject).subscribe((res) => {
-        alert("Project Created Successfully !!!");
-        console.log(res)
-        this.result=res;
-        this.router.navigate(['/wrapper/projects']);
-      })
-    }
-
-    if (this.formValue.invalid) {
-      alert("Please fill all the fields");
-    }
-
   }
 
   optionClicked(event: Event, item: any) {
@@ -127,13 +96,44 @@ export class CreateProjectComponent implements OnInit {
     task.selected = !task.selected;
     if (task.selected) {
       this.tasksSelected.push(task);
-      console.log(this.tasksSelected)
       this.changeCallback(this.tasksSelected);
     } else {
       const i = this.tasksSelected.findIndex((value: any) => value === task);
       this.tasksSelected.splice(i, 1);
       this.changeCallback(this.tasksSelected);
     }
+  }
+
+  showData() {
+
+    this.projectObject.id = this.updateDataObject.id;
+    this.formValue.controls['name'].setValue(this.updateDataObject.name);
+    this.formValue.controls['status'].setValue(this.updateDataObject.status);
+    this.formValue.controls['admin'].setValue(this.updateDataObject.admin);
+    this.formValue.controls['manager'].setValue(this.updateDataObject.manager);
+    this.selectedProjectInfo = this.updateDataObject.role;
+    this.tasksSelected = this.updateDataObject.tasks;
+    this.formValue.controls['tasks'].setValue(this.tasksSelected);
+    this.formValue.controls['sdate'].setValue(this.updateDataObject.sdate);
+    this.formValue.controls['edate'].setValue(this.updateDataObject.edate);
+  }
+
+  updateData() {
+
+    this.projectObject.id = this.projectObject.id;
+    this.projectObject.name = this.formValue.value.name;
+    this.projectObject.status = this.formValue.value.status;
+    this.projectObject.admin = this.formValue.value.admin;
+    this.projectObject.manager = this.formValue.value.manager;
+    this.projectObject.role = this.selectedProjectInfo;
+    this.projectObject.tasks = this.tasksSelected;
+    this.projectObject.sdate = this.formValue.value.sdate;
+    this.projectObject.edate = this.formValue.value.edate;
+
+    this.http.put("http://localhost:3000/posts/" + this.projectObject.id, this.projectObject).subscribe((res) => {
+      alert("Project Information Updated Successfully !!!");
+    })
+
   }
 
   addRole(roleName: any) {
@@ -163,4 +163,6 @@ export class CreateProjectComponent implements OnInit {
       alert("Role is Disabled");
     }
   }
+
+
 }

@@ -2,28 +2,47 @@
   "posts": [
     {
       "id": 1,
-      "name": "Eversana",
-      "status": "Active",
+      "name": "Intellidoc",
+      "status": true,
       "tasks": [
         {
-          "task": "View User",
+          "task": "Update User",
           "selected": true
         },
         {
-          "task": "Extract Document",
+          "task": "Process Document",
           "selected": true
         }
       ],
-      "role": "Developer",
-      "admin": "Eversana",
+      "role": [
+        {
+          "isEnabled": true,
+          "role": "Tester",
+          "status": "enabled",
+          "users": [
+            "pooja.katurde@neutrinotechlabs.com"
+          ]
+        },
+        {
+          "isEnabled": true,
+          "role": "Developer",
+          "status": "enabled",
+          "users": [
+            "shrinivas.chidrawar@@neutrinotechlabs.com",
+            "akshay.kumar@neutrinotechlabs.com"
+          ]
+        }
+      ],
+      "admin": "Intellidoc",
       "manager": "Akshay Kumar",
-      "sdate": "2022-05-17T18:30:00.000Z",
-      "edate": "2022-08-10T18:30:00.000Z"
+      "sdate": "2022-07-31T18:30:00.000Z",
+      "edate": "2022-08-30T18:30:00.000Z",
+      "users": []
     },
     {
       "id": 2,
-      "name": "Dyanamic Form",
-      "status": "Active",
+      "name": "Intellidoc",
+      "status": true,
       "tasks": [
         {
           "task": "Update User",
@@ -34,15 +53,26 @@
           "selected": true
         }
       ],
-      "role": "Manager",
+      "role": [
+        {
+          "isEnabled": true,
+          "role": "Admin",
+          "status": "enabled",
+          "users": [
+            "pooja.katurde@neutrinotechlabs.com",
+            "shrinivas.chidrawar@@neutrinotechlabs.com"
+          ]
+        }
+      ],
       "admin": "Intellidoc",
       "manager": "Akshay Kumar",
-      "sdate": "2022-05-17T18:30:00.000Z",
-      "edate": "2022-10-12T18:30:00.000Z"
+      "sdate": "2022-08-08T18:30:00.000Z",
+      "edate": "2022-08-17T18:30:00.000Z",
+      "users": []
     },
     {
       "id": 3,
-      "name": "Eversana",
+      "name": "Intellidoc",
       "status": true,
       "tasks": [
         {
@@ -54,31 +84,52 @@
           "selected": true
         }
       ],
-      "role": "Developer",
-      "admin": "Eversana",
-      "manager": "K abhishek",
-      "sdate": "2022-07-14T18:30:00.000Z",
-      "edate": "2022-07-14T18:30:00.000Z"
+      "role": [
+        {
+          "isEnabled": true,
+          "role": "Manager",
+          "status": "enabled",
+          "users": [
+            "pooja.katurde@neutrinotechlabs.com"
+          ]
+        }
+      ],
+      "admin": "Intellidoc",
+      "manager": "Akshay Kumar",
+      "sdate": "2022-08-07T18:30:00.000Z",
+      "edate": "2022-08-17T18:30:00.000Z",
+      "users": []
     },
     {
       "id": 4,
-      "name": "Eversana",
+      "name": "Intellidoc",
       "status": true,
       "tasks": [
         {
-          "task": "Update User",
+          "task": "Extract Document",
           "selected": true
         },
         {
-          "task": "Process Document",
+          "task": "View User",
           "selected": true
         }
       ],
-      "role": "Developer",
+      "role": [
+        {
+          "isEnabled": true,
+          "role": "Tester",
+          "status": "enabled",
+          "users": [
+            "pooja.katurde@neutrinotechlabs.com",
+            "shrinivas.chidrawar@@neutrinotechlabs.com"
+          ]
+        }
+      ],
       "admin": "Eversana",
       "manager": "Akshay Kumar",
-      "sdate": "2022-06-22T18:30:00.000Z",
-      "edate": "2022-09-11T18:30:00.000Z"
+      "sdate": "2022-08-08T18:30:00.000Z",
+      "edate": "2022-08-17T18:30:00.000Z",
+      "users": []
     },
     {
       "id": 5,
@@ -86,15 +137,29 @@
       "status": true,
       "tasks": [
         {
-          "task": "Process Document",
+          "task": "Update User",
+          "selected": true
+        },
+        {
+          "task": "View User",
           "selected": true
         }
       ],
-      "role": "Developer",
-      "admin": "Eversana",
-      "manager": "Akshay Kumar",
-      "sdate": "2022-06-22T18:30:00.000Z",
-      "edate": "2022-09-11T18:30:00.000Z"
+      "role": [
+        {
+          "isEnabled": true,
+          "role": "Tester",
+          "status": "enabled",
+          "users": [
+            "pooja.katurde@neutrinotechlabs.com"
+          ]
+        }
+      ],
+      "admin": "Intellidoc",
+      "manager": "K abhishek",
+      "sdate": "2022-08-10T18:30:00.000Z",
+      "edate": "2022-08-30T18:30:00.000Z",
+      "users": []
     }
   ],
   "comments": [

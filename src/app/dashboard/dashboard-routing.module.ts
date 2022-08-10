@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { EmployeeComponent } from './pages/employee/employee.component';
 import { PermissionComponent } from './pages/permission/permission.component';
-import { CreateProjectComponent } from './pages/projects/create-project/create-project.component';
-import { ProjectsComponent } from './pages/projects/projects/projects.component';
-import { RoleComponent } from './pages/role/role/role.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 

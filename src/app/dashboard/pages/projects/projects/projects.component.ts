@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { projectData } from './projects.modal';
@@ -9,10 +9,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
-
+import { ApiService } from 'src/app/shared/api.service';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -33,7 +31,7 @@ export class ProjectsComponent implements OnInit {
   roles: any;
   autoRenew: Boolean | undefined;
   editedToggle: boolean | undefined;
-  displayedColumns: string[] = ['name', 'status', 'admin', 'manager', 'role', 'tasks', 'sdate', 'edate', 'action'];
+  displayedColumns: string[] = ['name', 'status', 'admin', 'manager', 'tasks', 'sdate', 'edate', 'role', 'action'];
 
   private changeCallback!: Function;
   dataSource!: MatTableDataSource<any>;
@@ -42,7 +40,7 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private http: HttpClient,private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private shared: ApiService) { }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -66,19 +64,6 @@ export class ProjectsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  clickAddData(content: any) {
-    
-    // this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    // this.formValue.reset();
-    // this.showAdd = true;
-    // this.showbtn = false;
-    // if (this.showAdd) {
-    //   this.getTaskData();
-    //   this.tasksSelected = [];
-    // }
-
   }
 
   ngOnInit(): void {
@@ -136,85 +121,13 @@ export class ProjectsComponent implements OnInit {
 
   deleteProject(data: any) {
     this.http.delete("http://localhost:3000/posts/" + data.id).subscribe((res) => {
-      console.log(res);
+      alert("Project Deleted Successfully !!")
       this.getProjectData();
     })
   }
 
-  addProject() {
-    this.projectObject.id = this.formValue.value.id;
-    this.projectObject.name = this.formValue.value.name;
-    this.projectObject.status = this.formValue.value.status;
-    this.projectObject.admin = this.formValue.value.admin;
-    this.projectObject.manager = this.formValue.value.manager;
-    this.projectObject.role = this.formValue.value.role;
-    this.formValue.controls['tasks'].setValue(this.tasksSelected);
-    this.projectObject.tasks = this.formValue.value.tasks;
-    this.projectObject.sdate = this.formValue.value.sdate;
-    this.projectObject.edate = this.formValue.value.edate;
-
-    this.http.post<any>("http://localhost:3000/posts", this.projectObject).subscribe((res) => {
-      console.log(res);
-      this.getProjectData();
-    })
-
-  }
-
-  onShowData(contentView: any, data: any) {
-    this.showAdd = false;
-    this.showbtn = true;
-    this.modalService.open(contentView, {
-      ariaLabelledBy: 'modal-basic-title',
-    });
-    this.projectObject.id = data.id;
-    this.formValue.controls['id'].setValue(data.id);
-    this.formValue.controls['name'].setValue(data.name);
-    this.formValue.controls['status'].setValue(data.status);
-    this.formValue.controls['admin'].setValue(data.admin);
-    this.formValue.controls['manager'].setValue(data.manager);
-    this.formValue.controls['role'].setValue(data.role);
-    this.tasksSelected = data.tasks;
-    this.formValue.controls['tasks'].setValue(this.tasksSelected);
-    this.formValue.controls['sdate'].setValue(data.sdate);
-    this.formValue.controls['edate'].setValue(data.edate);
-  }
-
-  onEditData(content: any, data: any) {
-    this.showAdd = false;
-    this.showbtn = true;
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    this.projectObject.id = data.id;
-    this.formValue.controls['name'].setValue(data.name);
-    this.formValue.controls['status'].setValue(data.status);
-    this.formValue.controls['admin'].setValue(data.admin);
-    this.formValue.controls['manager'].setValue(data.manager);
-    this.formValue.controls['role'].setValue(data.role);
-    this.tasksSelected = data.tasks;
-    this.formValue.controls['tasks'].setValue(this.tasksSelected);
-    this.formValue.controls['sdate'].setValue(data.sdate);
-    this.formValue.controls['edate'].setValue(data.edate);
-  }
-
-  updateData() {
-
-    this.projectObject.id = this.projectObject.id;
-    this.projectObject.name = this.formValue.value.name;
-    this.projectObject.status = this.formValue.value.status;
-    this.projectObject.admin = this.formValue.value.admin;
-    this.projectObject.manager = this.formValue.value.manager;
-    this.projectObject.role = this.formValue.value.role;
-    this.projectObject.tasks = this.tasksSelected;
-    this.projectObject.sdate = this.formValue.value.sdate;
-    this.projectObject.edate = this.formValue.value.edate;
-    console.log(this.projectObject.id);
-    this.http.put("http://localhost:3000/posts/" + this.projectObject.id, this.projectObject).subscribe((res) => {
-      console.log(res);
-      this.getProjectData();
-    })
-    this.formValue.reset();
-    this.tasksSelected = [];
-    this.modalService.dismissAll();
+  editData(data: any) {
+    this.shared.sendUpdateData(data);
   }
 
   optionClicked(event: Event, item: any) {

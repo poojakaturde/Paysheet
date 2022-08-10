@@ -1,6 +1,6 @@
 <div class="container-fluid p-3">
     <form class="formBorder" [formGroup]="formValue">
-        <mat-card class="border rounded p-3 mb-5 create_project">
+        <mat-card class="border rounded p-3 mb-3 create_project">
             <mat-form-field appearance="outline">
                 <mat-label>Project Name</mat-label>
                 <input matInput type="text" formControlName="name">
@@ -69,7 +69,6 @@
                 </mat-autocomplete>
             </mat-form-field>
         </mat-card>
-
         <mat-expansion-panel class="mb-3" hideToggle="true" #roles>
             <mat-expansion-panel-header>
                 <mat-panel-title class="justify-content-start">
@@ -118,12 +117,13 @@
                                         <mat-icon color="primary" class="float-left">add_circle_outline</mat-icon>
                                     </button>
                                     <mat-select color="primary" class="hidedropDown" panelClass="over_riderMatSelect"
-                                    [(ngModel)]="rolesWithUsers.users" [ngModelOptions]="{standalone: true}" #userListDP multiple>
+                                        [(ngModel)]="rolesWithUsers.users" [ngModelOptions]="{standalone: true}"
+                                        #userListDP multiple>
                                         <mat-option *ngFor="let userName of userList" #el [value]="userName"
                                             [matTooltip]="userName.length > 24 ? userName : ''"> {{
                                             userName }} </mat-option>
                                     </mat-select>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -148,14 +148,12 @@
                 </div>
             </div>
         </mat-expansion-panel>
-
         <div class="container-fluid p-3">
             <div class="my-3 text-right mr-3 " style="float: right;">
-                <button mat-raised-button color="primary" style="margin-right:15px" (click)="createProject()"> Create
+                <button mat-raised-button color="primary" style="margin-right:15px" (click)="updateData()"> Update
                 </button>
                 <button mat-stroked-button color="accent" [routerLink]="['/wrapper/projects']">Cancel</button>
             </div>
         </div>
     </form>
 </div>
-
